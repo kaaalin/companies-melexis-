@@ -1,4 +1,4 @@
-\"use client\";
+"use client";
 import React, { useState, useMemo } from \"react\";
 import { motion } from \"framer-motion\";
 import { Search, Sparkles, Building2, Users2, Download, Filter, Bug } from \"lucide-react\";
