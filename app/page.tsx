@@ -21,18 +21,14 @@ const Input = (props: React.InputHTMLAttributes<HTMLInputElement>) => (
   />
 );
 
-const Button = ({
-  children,
-  icon: Icon,
-  variant = "primary",
-  className = "",
-  ...props
-}: {
+type ButtonProps = {
   children: React.ReactNode;
-  icon?: React.ComponentType<{ size?: number }>;
+  icon?: React.ElementType; // <- accept Lucide icons (ForwardRefExoticComponent)
   variant?: "primary" | "ghost" | "subtle";
   className?: string;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+
+const Button = ({ children, icon: Icon, variant = "primary", className = "", ...props }: ButtonProps) => {
   const base =
     "inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium transition shadow-sm";
   const variants: Record<string, string> = {
@@ -40,10 +36,9 @@ const Button = ({
     ghost: "bg-white text-gray-800 border hover:bg-gray-50",
     subtle: "bg-gray-100 text-gray-900 hover:bg-gray-200",
   };
-  const IconEl = Icon ? <Icon size={16} /> : null;
   return (
     <button {...props} className={`${base} ${variants[variant]} ${className}`}>
-      {IconEl}
+      {Icon ? <Icon size={16} /> : null}
       {children}
     </button>
   );
